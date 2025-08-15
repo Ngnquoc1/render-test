@@ -3,10 +3,6 @@ const app = express()
 
 app.use(express.json())
 
-const cors = require('cors')
-
-app.use(cors())
-
 const morgan=require('morgan')
 morgan.token('body',(request,response)=>{
   return JSON.stringify(request.body)
@@ -42,10 +38,7 @@ app.get('/api/notes', (request, response) => {
     response.json(notes)
 })
 
-const PORT = 3001
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`)
-})
+
 
 app.get('/api/notes/:id', (request, response) => {
     const id = request.params.id
@@ -90,4 +83,9 @@ app.post('/api/notes', (request, response) => {
   notes = notes.concat(note)
 
   response.json(note)
+})
+
+const PORT = 3001
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`)
 })
